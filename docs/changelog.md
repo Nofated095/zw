@@ -1,10 +1,41 @@
 ---
 title: 更新日志
-author: Lama
+author: Lama & Nofated
 tag: 更新日志
 ---
 
 [[toc]]
+
+## 2023.03.04 添加新功能，提升编辑体验
+
+经过 lama 的长达三分钟的全局搜索（搜 VSCode 全局搜索快捷键搜了三分钟的 lama 就是逊啦），才找到了添加 sidebar 的地方，仔细一看我的天哪，原来都是手动的。
+
+$$
+\huge{\textbf{\textit{这可不行！}}}
+$$
+
+> *LaTex 数学插件竟然支持 \textbf 和 \textit*。
+
+于是写了一行代码自动化了这个流程，以后只需要在 `docs/1A 1B 1C 1D` 里面写文章即可，不再需要额外操作了！但是如果需要添加分区，则需要修改 `docs/.vurepress/categories.ts`。
+
+修改方法也很简单，使用下面模板向数组内添加一条就行
+
+```typescript
+{ 
+    directory: '文件夹名字，不需要完整目录，例如 "docs/1D" 那么你就要写：1D', 
+    displayName: '显示名字，例如：祝福篇'
+}
+```
+
+我还添加了一个 `filter` 支持，默认为排除所有后缀不是 `.md` 的文件，如果你想修改这个，你可以添加一个额外的成员 `filter` 来覆写原有的。下面是一个排除所有不是 `.ts` 文件的示例代码
+
+```typescript
+{ 
+    directory: '文件夹名字，不需要完整目录，例如 "docs/1D" 那么你就要写：1D', 
+    displayName: '显示名字，例如：祝福篇',
+    filter: (fileName) => fileName.endsWith('.ts')
+}
+```
 
 ## 2022.12.23 迁移框架 & 增加 Logo & 一些想说的
 
